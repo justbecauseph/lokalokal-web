@@ -21,8 +21,8 @@ class TransactionTableSeeder extends Seeder {
         // Permissions
         DB::table('permissions')->insert([
             [
-                'name'         => 'read-transaction',
-                'display_name' => 'Read Transaction',
+                'name'         => 'read-transactions',
+                'display_name' => 'Read Transactions',
                 'guard_name'   => 'web',
                 'module_id'    => $moduleId
             ]
@@ -33,10 +33,10 @@ class TransactionTableSeeder extends Seeder {
         $admin->givePermissionTo(Permission::all());
 
         $partner = Role::findByName('partner');
-        $partner->givePermissionTo('read-transaction');
+        $partner->givePermissionTo('read-transactions');
 
         // Assign permissions to user role
         $user = Role::findByName('user');
-        $user->givePermissionTo('read-transaction');
+        $user->givePermissionTo('read-transactions');
     }
 }

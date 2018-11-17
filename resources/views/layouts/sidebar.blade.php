@@ -23,6 +23,20 @@
                 </a>
             </li>
             @endcan
+            @can('read-skus')
+                <li class="nav-item">
+                    <a class="nav-link" href="/skus">
+                        <i class="nav-icon icon-layers"></i> Skus
+                    </a>
+                </li>
+            @endcan
+            @can('read-transactions')
+                <li class="nav-item">
+                    <a class="nav-link" href="/transactions">
+                        <i class="nav-icon icon-list"></i> Transactions
+                    </a>
+                </li>
+            @endcan
         </ul>
     </nav>
     <sidebar></sidebar>

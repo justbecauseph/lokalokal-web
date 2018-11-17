@@ -1,7 +1,10 @@
 <template>
     <div>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Transactions</li>
+            <li class="breadcrumb-item active">Skus</li>
+            <li class="breadcrumb-menu">
+                <a class="btn btn-outline-success text-success" href="/skus/create">New sku</a>
+            </li>
         </ol>
         <div class="container">
             <div class="card-body px-0">
@@ -37,41 +40,35 @@
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th>
-                            <a href="#" class="text-dark" @click.prevent="sort('type')">Type</a>
+                            <a href="#" class="text-dark" @click.prevent="sort('name')">Name</a>
                             <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'type' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'type' && filters.orderBy.direction == 'desc'}"></i>
+                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th>
-                            <a href="#" class="text-dark" @click.prevent="sort('before_amount')">Before Txn Amount</a>
+                            <a href="#" class="text-dark" @click.prevent="sort('desc')">Description</a>
                             <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'before_amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'before_amount' && filters.orderBy.direction == 'desc'}"></i>
+                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'desc' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'desc' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th class="d-none d-sm-table-cell">
-                            <a href="#" class="text-dark" @click.prevent="sort('after_amount')">After Txn Amount</a>
+                            <a href="#" class="text-dark" @click.prevent="sort('code')">Code</a>
                             <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'after_amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'after_amount' && filters.orderBy.direction == 'desc'}"></i>
+                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'code' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'code' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th class="d-none d-sm-table-cell">
                             <a href="#" class="text-dark" @click.prevent="sort('amount')">Amount</a>
                             <i class="ml-1 fas"
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'amount' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
-                        <th class="d-none d-sm-table-cell">
-                            <a href="#" class="text-dark" @click.prevent="sort('created_at')">Timestamp</a>
-                            <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
-                        </th>
                         <th class="d-none d-sm-table-cell"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="transaction in transactions">
-                        <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
-                        <td>{{transaction.type}}</td>
-                        <td class="d-none d-sm-table-cell">{{transaction.before_amount}}</td>
-                        <td>{{transaction.after_amount}}</td>
-                        <td class="d-none d-sm-table-cell">{{transaction.amount}}</td>
-                        <td>{{transaction.created_at}}</td>
+                    <tr v-for="sku in skus">
+                        <td class="d-none d-sm-table-cell">{{sku.id}}</td>
+                        <td>{{sku.name}}</td>
+                        <td class="d-none d-sm-table-cell">{{sku.desc}}</td>
+                        <td>{{sku.code}}</td>
+                        <td class="d-none d-sm-table-cell">{{sku.amount}}</td>
                         <td class="d-none d-sm-table-cell">
                             <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
                         </td>
@@ -101,7 +98,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="no-items-found text-center mt-5" v-if="!loading && !transactions.length > 0">
+                <div class="no-items-found text-center mt-5" v-if="!loading && !skus.length > 0">
                     <i class="icon-magnifier fa-3x text-muted"></i>
                     <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
                     <p class="text-muted">Try changing the filters or add a new one</p>
@@ -118,7 +115,7 @@
     export default {
         data() {
             return {
-                transactions: [],
+                skus: [],
                 filters: {
                     pagination: {
                         from: 0,
@@ -138,23 +135,23 @@
             }
         },
         mounted() {
-            if (localStorage.getItem("filtersTableTransactions")) {
-                this.filters = JSON.parse(localStorage.getItem("filtersTableTransactions"))
+            if (localStorage.getItem("filtersTableSkus")) {
+                this.filters = JSON.parse(localStorage.getItem("filtersTableSkus"))
             } else {
-                localStorage.setItem("filtersTableTransactions", this.filters);
+                localStorage.setItem("filtersTableSkus", this.filters);
             }
-            this.getTransactions()
+            this.getSkus()
         },
         methods: {
-            getTransactions() {
-                this.loading      = true
-                this.transactions = []
+            getSkus() {
+                this.loading = true
+                this.skus    = []
 
-                localStorage.setItem("filtersTableTransactions", JSON.stringify(this.filters));
+                localStorage.setItem("filtersTableSkus", JSON.stringify(this.filters));
 
-                axios.post(`/api/transactions/filter?page=${this.filters.pagination.current_page}`, this.filters)
+                axios.post(`/api/skus/filter?page=${this.filters.pagination.current_page}`, this.filters)
                     .then(response => {
-                        this.transactions = response.data.data
+                        this.skus = response.data.data
                         delete response.data.data
                         this.filters.pagination = response.data
                         this.loading            = false
@@ -163,12 +160,12 @@
             // Filters
             filter() {
                 this.filters.pagination.current_page = 1
-                this.getTransactions()
+                this.getSkus()
             },
             changeSize(perPage) {
                 this.filters.pagination.current_page = 1
                 this.filters.pagination.per_page     = perPage
-                this.getTransactions()
+                this.getSkus()
             },
             sort(column) {
                 if (column == this.filters.orderBy.column) {
@@ -178,11 +175,11 @@
                     this.filters.orderBy.direction = 'asc'
                 }
 
-                this.getTransactions()
+                this.getSkus()
             },
             changePage(page) {
                 this.filters.pagination.current_page = page
-                this.getTransactions()
+                this.getSkus()
             }
         }
     }

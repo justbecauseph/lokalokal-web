@@ -12,4 +12,9 @@ class SkuController extends Controller
     {
         return Sku::all();
     }
+
+    public function show($id)
+    {
+        return Sku::where('code', $id)->firstOrFail();
+    }
 }

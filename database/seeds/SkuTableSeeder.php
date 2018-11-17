@@ -22,19 +22,19 @@ class SkuTableSeeder extends Seeder
 
         DB::table('permissions')->insert([
             [
-                'name' => 'read-sku',
+                'name' => 'read-skus',
                 'display_name' => 'Read SKU',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'create-sku',
+                'name' => 'create-skus',
                 'display_name' => 'Create SKU',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
             ],
             [
-                'name' => 'update-sku',
+                'name' => 'update-skus',
                 'display_name' => 'Update SKU',
                 'guard_name' => 'web',
                 'module_id' => $moduleId
@@ -46,6 +46,6 @@ class SkuTableSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
 
         $admin = Role::findByName('partner');
-        $admin->givePermissionTo('read-sku', 'create-sku', 'update-sku');
+        $admin->givePermissionTo('read-skus', 'create-skus', 'update-skus');
     }
 }

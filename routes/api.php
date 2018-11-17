@@ -16,6 +16,8 @@ Route::middleware('auth.basic')->group(function () {
 
     Route::get('skus', 'Api\SkuController@index');
 
+    Route::get('skus/{id}', 'Api\SkuController@show');
+
     Route::post('transact', 'Api\TransactionController@store');
 
     Route::post('topup', 'Api\TransactionController@topup');

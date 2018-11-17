@@ -56,6 +56,10 @@ Vue.component('roles-index', require('./components/roles/Index.vue'));
 Vue.component('roles-create', require('./components/roles/Create.vue'));
 Vue.component('roles-edit', require('./components/roles/Edit.vue'));
 
+Vue.component('skus-index', require('./components/skus/Index.vue'));
+
+Vue.component('transactions-index', require('./components/transactions/Index.vue'));
+
 const app = new Vue({
     el: '#app'
 });
