@@ -1,7 +1,7 @@
 <template>
     <div>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Transactions</li>
+            <li class="breadcrumb-item active">Branches</li>
         </ol>
         <div class="container">
             <div class="card-body px-0">
@@ -9,9 +9,9 @@
                     <div class="col-7 col-md-5">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" @click="filter">
-                                  <i class="fas fa-search"></i>
-                                </span>
+                <span class="input-group-text" @click="filter">
+                  <i class="fas fa-search"></i>
+                </span>
                             </div>
                             <input type="text" class="form-control" placeholder="Search" v-model.trim="filters.search" @keyup.enter="filter">
                         </div>
@@ -37,51 +37,30 @@
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th>
-                            <a href="#" class="text-dark" @click.prevent="sort('type')">Type</a>
+                            <a href="#" class="text-dark" @click.prevent="sort('name')">Name</a>
                             <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'type' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'type' && filters.orderBy.direction == 'desc'}"></i>
+                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
                         <th>
-                            <a href="#" class="text-dark" @click.prevent="sort('before_amount')">Before Txn Amount</a>
+                            <a href="#" class="text-dark" @click.prevent="sort('address')">Address</a>
                             <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'before_amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'before_amount' && filters.orderBy.direction == 'desc'}"></i>
+                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'address' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'address' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
-                        <th class="d-none d-sm-table-cell">
-                            <a href="#" class="text-dark" @click.prevent="sort('after_amount')">After Txn Amount</a>
-                            <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'after_amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'after_amount' && filters.orderBy.direction == 'desc'}"></i>
-                        </th>
-                        <th class="d-none d-sm-table-cell">
-                            <a href="#" class="text-dark" @click.prevent="sort('amount')">Amount</a>
-                            <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'amount' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'amount' && filters.orderBy.direction == 'desc'}"></i>
-                        </th>
-                        <th>SKU</th>
-                        <th>Branch</th>
-                        <th>User</th>
-                        <th class="d-none d-sm-table-cell">
-                            <a href="#" class="text-dark" @click.prevent="sort('created_at')">Timestamp</a>
-                            <i class="ml-1 fas"
-                               :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'created_at' && filters.orderBy.direction == 'desc'}"></i>
-                        </th>
+                        <th>Owner</th>
+                        <th>Created At</th>
+                        <th class="d-none d-sm-table-cell"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="transaction in transactions">
-                        <td class="d-none d-sm-table-cell">{{transaction.id}}</td>
-                            <td v-if="transaction.type === 'debit'">
-                                <span class="badge badge-success">DEBIT</span>
-                            </td>
-                            <td v-else>
-                                <span class="badge badge-danger">CREDIT</span>
-                            </td>
-                        <td class="d-none d-sm-table-cell">{{transaction.before_amount}}</td>
-                        <td>{{transaction.after_amount}}</td>
-                        <td class="d-none d-sm-table-cell">{{transaction.amount}}</td>
-                        <td>{{transaction.sku ? transaction.sku.name : '-'}}</td>
-                        <td>{{transaction.branch ? transaction.branch.name : '-'}}</td>
-                        <td>{{transaction.user.name}}</td>
-                        <td>{{transaction.created_at}}</td>
+                    <tr v-for="branch in branches">
+                        <td class="d-none d-sm-table-cell">{{branch.id}}</td>
+                        <td>{{branch.name}}</td>
+                        <td class="d-none d-sm-table-cell">{{branch.address}}</td>
+                        <td>{{branch.user.name}}</td>
+                        <td class="d-none d-sm-table-cell">{{branch.created_at}}</td>
+                        <td class="d-none d-sm-table-cell">
+                            <a href="#" class="text-muted"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -108,7 +87,7 @@
                         </nav>
                     </div>
                 </div>
-                <div class="no-items-found text-center mt-5" v-if="!loading && !transactions.length > 0">
+                <div class="no-items-found text-center mt-5" v-if="!loading && !branches.length > 0">
                     <i class="icon-magnifier fa-3x text-muted"></i>
                     <p class="mb-0 mt-3"><strong>Could not find any items</strong></p>
                     <p class="text-muted">Try changing the filters or add a new one</p>
@@ -125,7 +104,7 @@
     export default {
         data() {
             return {
-                transactions: [],
+                branches: [],
                 filters: {
                     pagination: {
                         from: 0,
@@ -145,23 +124,23 @@
             }
         },
         mounted() {
-            if (localStorage.getItem("filtersTableTransactions")) {
-                this.filters = JSON.parse(localStorage.getItem("filtersTableTransactions"))
+            if (localStorage.getItem("filtersTableBranches")) {
+                this.filters = JSON.parse(localStorage.getItem("filtersTableBranches"))
             } else {
-                localStorage.setItem("filtersTableTransactions", this.filters);
+                localStorage.setItem("filtersTableBranches", this.filters);
             }
-            this.getTransactions()
+            this.getBranches()
         },
         methods: {
-            getTransactions() {
-                this.loading      = true
-                this.transactions = []
+            getBranches() {
+                this.loading = true
+                this.branches    = []
 
-                localStorage.setItem("filtersTableTransactions", JSON.stringify(this.filters));
+                localStorage.setItem("filtersTableBranches", JSON.stringify(this.filters));
 
-                axios.post(`/api/transactions/filter?page=${this.filters.pagination.current_page}`, this.filters)
+                axios.post(`/api/branches/filter?page=${this.filters.pagination.current_page}`, this.filters)
                     .then(response => {
-                        this.transactions = response.data.data
+                        this.branches = response.data.data
                         delete response.data.data
                         this.filters.pagination = response.data
                         this.loading            = false
@@ -170,12 +149,12 @@
             // Filters
             filter() {
                 this.filters.pagination.current_page = 1
-                this.getTransactions()
+                this.getBranches()
             },
             changeSize(perPage) {
                 this.filters.pagination.current_page = 1
                 this.filters.pagination.per_page     = perPage
-                this.getTransactions()
+                this.getBranches()
             },
             sort(column) {
                 if (column == this.filters.orderBy.column) {
@@ -185,11 +164,11 @@
                     this.filters.orderBy.direction = 'asc'
                 }
 
-                this.getTransactions()
+                this.getBranches()
             },
             changePage(page) {
                 this.filters.pagination.current_page = page
-                this.getTransactions()
+                this.getBranches()
             }
         }
     }

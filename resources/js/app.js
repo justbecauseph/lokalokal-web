@@ -61,6 +61,8 @@ Vue.component('skus-index', require('./components/skus/Index.vue'));
 
 Vue.component('transactions-index', require('./components/transactions/Index.vue'));
 
+Vue.component('branches-index', require('./components/branches/Index.vue'));
+
 const app = new Vue({
     el: '#app'
 });

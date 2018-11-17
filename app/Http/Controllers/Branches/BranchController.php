@@ -1,13 +1,13 @@
 <?php
 
-namespace LokaLocal\Http\Controllers\Transactions;
+namespace LokaLocal\Http\Controllers\Branches;
 
-use Auth;
 use Illuminate\Http\Request;
+use LokaLocal\Branch;
 use LokaLocal\Http\Controllers\Controller;
-use LokaLocal\Transaction;
 
-class TransactionController extends Controller {
+class BranchController extends Controller
+{
     protected $query;
 
     public function __construct()
@@ -16,13 +16,9 @@ class TransactionController extends Controller {
             $user = auth()->user();
 
             if ($user->hasRole('admin')) {
-                $this->query = Transaction::query();
+                $this->query = Branch::query();
             } elseif ($user->hasRole('partner')) {
-                $this->query = Transaction::query()->whereHas('branch', function ($q) use ($user) {
-                    return $q->where('user_id', $user->id);
-                });
-            } else {
-                $this->query = Transaction::query()->where('user_id', $user->id);
+                $this->query = Branch::query()->where('user_id', $user->id);
             }
 
             return $next($request);
