@@ -2,6 +2,7 @@
 
 namespace LokaLocal\Providers;
 
+use Illuminate\Auth\Events\Authenticated;
 use Illuminate\Support\ServiceProvider;
 use LokaLocal\Observers\UserObserver;
 use LokaLocal\User;
@@ -18,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         User::observe(UserObserver::class);
+
+        $this->app['events']->listen(Authenticated::class, function ($e) {
+            view()->share('user', $e->user);
+        });
     }
 
     /**

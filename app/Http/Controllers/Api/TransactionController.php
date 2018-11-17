@@ -21,6 +21,7 @@ class TransactionController extends Controller {
 
         $before = auth()->user()->wallet->amount;
         auth()->user()->wallet->decrement('amount', $sku->amount);
+        $sku->branch->user->wallet->increment('amount', $sku->amount);
         $after = auth()->user()->wallet->amount;
 
         $txn                = new Transaction;
@@ -38,7 +39,8 @@ class TransactionController extends Controller {
         ]);
     }
 
-    public function topup(TopupRequest $request) {
+    public function topup(TopupRequest $request)
+    {
         $before = auth()->user()->wallet->amount;
         auth()->user()->wallet->increment('amount', $request->get('amount'));
         $after = auth()->user()->wallet->amount;
