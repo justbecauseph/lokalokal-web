@@ -7,5 +7,8 @@ use LokaLocal\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    //
+    public function self()
+    {
+        return \Auth::user();
+    }
 }

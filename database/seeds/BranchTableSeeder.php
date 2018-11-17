@@ -61,15 +61,13 @@ class BranchTableSeeder extends Seeder {
             'user_id'   => $user->id
         ]);
 
-        var_dump('creating skus');
-
         $sku = [
             [
                 'name'      => 'Espresso',
                 'desc'      => 'Espresso (/ɛˈsprɛsoʊ/, Italian: [esˈprɛsso]) is coffee brewed by expressing or forcing a small amount of nearly boiling water under pressure through finely ground coffee beans. Espresso is generally thicker than coffee brewed by other methods, has a higher concentration of suspended and dissolved solids, and has crema on top (a foam with a creamy consistency).',
                 'code'      => 'espresso',
                 'amount'    => 90,
-                'avatar'    => 'img/espresso.jpg',
+                'avatar'    => 'storage/img/espresso.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -79,7 +77,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'Caffè Americano (Italian pronunciation: [kafˈfɛ ameriˈkaːno]) or Americano (shortened from Italian: caffè americano or American; Spanish: café americano, literally American coffee) is a type of coffee drink prepared by diluting an espresso with hot water, giving it a similar strength to, but different flavor from traditionally brewed coffee.',
                 'code'      => 'americano',
                 'amount'    => 110,
-                'avatar'    => 'img/americano.jpg',
+                'avatar'    => 'storage/img/americano.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -89,7 +87,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'A latte (/ˈlɑːteɪ/ or /ˈlæteɪ/) is a coffee drink made with espresso and steamed milk.',
                 'code'      => 'caffe-latte',
                 'amount'    => 110,
-                'avatar'    => 'img/caffe-latte.jpg',
+                'avatar'    => 'storage/img/caffe-latte.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -99,7 +97,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'Not to be confused with iced coffee (in which espresso-based coffees are served over ice, usually with milk and syrup), cold brew coffee is simply coffee, brewed cold.',
                 'code'      => 'cold-brew',
                 'amount'    => 150,
-                'avatar'    => 'img/cold-brew.jpg',
+                'avatar'    => 'storage/img/cold-brew.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -109,7 +107,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'Iced tea is a form of cold tea. Though usually served in a glass with ice, it can refer to any tea that has been chilled or cooled. It may be sweetened with sugar, syrup and/or apple slices. Iced tea is also a popular packaged drink',
                 'code'      => 'iced-tea',
                 'amount'    => 100,
-                'avatar'    => 'img/iced-tea.jpg',
+                'avatar'    => 'storage/img/iced-tea.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -119,7 +117,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'The long coffee has a length that is 3 times the length of the espresso coffee',
                 'code'      => 'long-coffee',
                 'amount'    => 120,
-                'avatar'    => 'img/long-coffee.jpg',
+                'avatar'    => 'storage/img/long-coffee.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -129,7 +127,7 @@ class BranchTableSeeder extends Seeder {
                 'desc'      => 'Best water ever',
                 'code'      => 'premium-water',
                 'amount'    => 500,
-                'avatar'    => 'img/premium-water.jpg',
+                'avatar'    => 'storage/img/premium-water.jpg',
                 'branch_id' => $branch->id,
                 'created_at' => now(),
                 'updated_at' => now()

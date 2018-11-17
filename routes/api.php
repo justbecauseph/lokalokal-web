@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,7 +12,9 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth.basic')->group(function () {
-    Route::get('/me', function () {
-        return Response::json(Auth::user());
-    });
+    Route::get('me', 'Api\UserController@self');
+
+    Route::get('skus', 'Api\SkuController@index');
+
+    Route::post('transact', 'Api\TransactionController@store');
 });

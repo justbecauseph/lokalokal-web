@@ -13,7 +13,7 @@ class Transaction extends Model
 
     public function sku()
     {
-        return $this->hasOne(Sku::class);
+        return $this->belongsTo(Sku::class);
     }
 
     public function branch()
