@@ -7,16 +7,33 @@ use LokaLocal\Http\Controllers\Controller;
 use LokaLocal\Sku;
 
 class SkuController extends Controller {
+    protected $query;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+
+            if ($user->hasRole('admin')) {
+                $this->query = Sku::query();
+            } elseif ($user->hasRole('partner')) {
+                $this->query = Sku::query()->whereHas('branch', function ($q) use ($user) {
+                    return $q->where('user_id', $user->id);
+                });
+            }
+
+            return $next($request);
+        });
+    }
+
     public function filter(Request $request)
     {
-        $query = Sku::query();
-
         if ($request->search) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%');
+            $this->query->where('name', 'LIKE', '%' . $request->search . '%');
         }
 
-        $skus = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
-                      ->paginate($request->input('pagination.per_page'));
+        $skus = $this->query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
+                            ->paginate($request->input('pagination.per_page'));
 
         return $skus;
     }

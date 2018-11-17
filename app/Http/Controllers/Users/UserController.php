@@ -2,51 +2,47 @@
 
 namespace LokaLocal\Http\Controllers\Users;
 
+use Avatar;
 use Illuminate\Http\Request;
-use LokaLocal\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-
-use Avatar;
-
+use LokaLocal\Http\Controllers\Controller;
 use LokaLocal\User;
 
-class UserController extends Controller
-{
-    public function filter (Request $request)
+class UserController extends Controller {
+    public function filter(Request $request)
     {
         $query = User::query();
 
-        if($request->search) {
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        if ($request->search) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
         }
 
         $users = $query->orderBy($request->input('orderBy.column'), $request->input('orderBy.direction'))
-                    ->paginate($request->input('pagination.per_page'));
+                       ->paginate($request->input('pagination.per_page'));
 
         $users->load('roles');
 
         return $users;
     }
 
-    public function show ($user)
+    public function show($user)
     {
         return User::findOrFail($user);
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:users',
             'password' => 'required|string',
-            'roles' => 'required|array'
+            'roles'    => 'required|array'
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name'     => $request->name,
+            'email'    => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
@@ -54,25 +50,25 @@ class UserController extends Controller
         $user->assignRole($rolesNames);
 
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
-        Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+        Storage::put('avatars/' . $user->id . '/avatar.png', (string)$avatar);
 
         return $user;
     }
 
-    public function update (Request $request)
+    public function update(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,'.$request->id,
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:users,email,' . $request->id,
             'password' => 'string|nullable',
-            'roles' => 'required|array'
+            'roles'    => 'required|array'
         ]);
 
         $user = User::find($request->id);
 
         if ($user->name != $request->name) {
             $avatar = Avatar::create($request->name)->getImageObject()->encode('png');
-            Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+            Storage::put('avatars/' . $user->id . '/avatar.png', (string)$avatar);
             $user->name = $request->name;
         }
         if ($user->email != $request->email) {
@@ -90,17 +86,17 @@ class UserController extends Controller
         return $user;
     }
 
-    public function destroy ($user)
+    public function destroy($user)
     {
         return User::destroy($user);
     }
 
-    public function count ()
+    public function count()
     {
         return User::count();
     }
 
-    public function getUserRoles ($user)
+    public function getUserRoles($user)
     {
         $user = User::findOrFail($user);
         $user->getRoleNames();
@@ -108,5 +104,10 @@ class UserController extends Controller
         return $user;
     }
 
-
+    public function getWalletAmount()
+    {
+        return response()->json([
+            'amount' => auth()->user()->wallet->amount
+        ]);
+    }
 }

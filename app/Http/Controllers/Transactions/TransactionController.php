@@ -13,7 +13,7 @@ class TransactionController extends Controller {
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $user = Auth::user();
+            $user = auth()->user();
 
             if ($user->hasRole('admin')) {
                 $this->query = Transaction::query();
@@ -24,7 +24,7 @@ class TransactionController extends Controller {
             } else {
                 $this->query = Transaction::query()->where('user_id', $user->id);
             }
-            
+
             return $next($request);
         });
     }

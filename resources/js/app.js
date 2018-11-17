@@ -40,6 +40,7 @@ Vue.use(VueContentPlaceholders)
 
 // Dashboard
 Vue.component('users-count', require('./components/dashboard/UsersCount.vue'));
+Vue.component('wallet-amount', require('./components/dashboard/WalletAmount.vue'));
 Vue.component('roles-count', require('./components/dashboard/RolesCount.vue'));
 
 // Profile
