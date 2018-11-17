@@ -3,6 +3,7 @@
 namespace LokaLocal\Http\Controllers\Api;
 
 use LokaLocal\Http\Controllers\Controller;
+use LokaLocal\Http\Requests\TopupRequest;
 use LokaLocal\Http\Requests\TransactionRequest;
 use LokaLocal\Sku;
 use LokaLocal\Transaction;
@@ -30,6 +31,24 @@ class TransactionController extends Controller {
         $txn->sku()->associate($sku);
         $txn->user()->associate(auth()->user());
         $txn->branch()->associate($sku->branch);
+        $txn->save();
+
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
+
+    public function topup(TopupRequest $request) {
+        $before = auth()->user()->wallet->amount;
+        auth()->user()->wallet->increment('amount', $request->get('amount'));
+        $after = auth()->user()->wallet->amount;
+
+        $txn                = new Transaction;
+        $txn->type          = 'debit';
+        $txn->amount        = $request->get('amount');
+        $txn->before_amount = $before;
+        $txn->after_amount  = $after;
+        $txn->user()->associate(auth()->user());
         $txn->save();
 
         return response()->json([

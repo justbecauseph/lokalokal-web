@@ -18,11 +18,11 @@ class CreateTransactionsTable extends Migration {
             $table->decimal('amount', 19, 4);
             $table->decimal('before_amount', 19, 4);
             $table->decimal('after_amount', 19, 4);
-            $table->unsignedInteger('sku_id');
+            $table->unsignedInteger('sku_id')->nullable();
             $table->foreign('sku_id')->references('id')->on('skus')->onDelete('cascade');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('branch_id');
+            $table->unsignedInteger('branch_id')->nullable();
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
