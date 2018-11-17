@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Profile;
+namespace LokaLocal\Http\Controllers\Profile;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use LokaLocal\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-use App\Http\Helpers\Upload;
+use LokaLocal\Http\Helpers\Upload;
 use Avatar;
 
-use App\User;
+use LokaLocal\User;
 
 class ProfileController extends Controller
 {

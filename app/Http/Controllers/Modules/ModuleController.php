@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Modules;
+namespace LokaLocal\Http\Controllers\Modules;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Modules\Module;
+use LokaLocal\Http\Controllers\Controller;
+use LokaLocal\Models\Modules\Module;
 
 class ModuleController extends Controller
 {

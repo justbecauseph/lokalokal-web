@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace LokaLocal;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -25,13 +25,17 @@ class User extends Authenticatable
         'name', 'email', 'password', 'avatar',
     ];
 
+    protected $with = [
+        'wallet', 'transactions'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'deleted_at'
     ];
 
     protected $dates = ['deleted_at'];
@@ -41,5 +45,15 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute()
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

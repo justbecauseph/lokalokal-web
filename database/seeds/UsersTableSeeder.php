@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use LokaLocal\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -52,8 +53,8 @@ class UsersTableSeeder extends Seeder
         $admin = Role::findByName('admin');
         $admin->givePermissionTo(Permission::all());
 
-        // Create default user
-        $user = \App\User::create([
+        // Create admin user
+        $user = User::create([
             'name' => 'admin',
             'email' => 'admin@lokalocal.ph',
             'password' => bcrypt('admin'),
@@ -61,6 +62,19 @@ class UsersTableSeeder extends Seeder
         ]);
         // Assign admin role to default user
         $user->assignRole('admin');
+        // Generate avatar to defautl user
+        $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
+        Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);
+
+        // Create ordinary user
+        $user = User::create([
+            'name' => 'user',
+            'email' => 'user@lokalocal.ph',
+            'password' => bcrypt('user'),
+            'avatar' => 'avatar.png'
+        ]);
+        // Assign admin role to default user
+        $user->assignRole('user');
         // Generate avatar to defautl user
         $avatar = Avatar::create($user->name)->getImageObject()->encode('png');
         Storage::put('avatars/'.$user->id.'/avatar.png', (string) $avatar);

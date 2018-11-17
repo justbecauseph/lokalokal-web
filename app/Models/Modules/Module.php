@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Modules;
+namespace LokaLocal\Models\Modules;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;

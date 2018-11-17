@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace LokaLocal\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use LokaLocal\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 use Avatar;
 
-use App\User;
+use LokaLocal\User;
 
 class UserController extends Controller
 {

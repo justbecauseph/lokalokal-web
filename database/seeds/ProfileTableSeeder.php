@@ -53,9 +53,11 @@ class ProfileTableSeeder extends Seeder
         $admin = Role::findByName('admin');
         $admin->givePermissionTo(Permission::all());
 
+        $partner = Role::findByName('partner');
+        $partner->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');
+
         // Assign permissions to user role
         $user = Role::findByName('user');
         $user->givePermissionTo('read-profile', 'update-profile', 'read-profile-password', 'update-profile-password');
-
     }
 }

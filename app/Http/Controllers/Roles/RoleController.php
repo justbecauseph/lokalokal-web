@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Roles;
+namespace LokaLocal\Http\Controllers\Roles;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use LokaLocal\Http\Controllers\Controller;
 
 use Spatie\Permission\Models\Role;
-use App\Models\Modules\Module;
+use LokaLocal\Models\Modules\Module;
 
 class RoleController extends Controller
 {

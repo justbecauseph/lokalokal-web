@@ -1,4 +1,4 @@
-<?php namespace App\Http\Helpers;
+<?php namespace LokaLocal\Http\Helpers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
