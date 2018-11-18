@@ -22,10 +22,10 @@
         methods: {
             fillData () {
                 this.datacollection = {
-                    labels: ['OWO', 'UWU'],
+                    labels: ['Credit', 'Debit'],
                     datasets: [
                         {
-                            backgroundColor: ['#f87979','#777'],
+                            backgroundColor: ['#353a40', '#000000'],
                             data: [this.getRandomInt(), this.getRandomInt()]
                         }
                     ]

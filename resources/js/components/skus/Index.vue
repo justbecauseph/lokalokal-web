@@ -16,7 +16,7 @@
                   <i class="fas fa-search"></i>
                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Seach" v-model.trim="filters.search" @keyup.enter="filter">
+                            <input type="text" class="form-control" placeholder="Search" v-model.trim="filters.search" @keyup.enter="filter">
                         </div>
                     </div>
                     <div class="col-auto">
@@ -39,12 +39,12 @@
                             <i class="ml-1 fas"
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'id' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'id' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
-                        <th>
+                        <th class="d-none d-sm-table-cell">
                             <a href="#" class="text-dark" @click.prevent="sort('name')">Name</a>
                             <i class="ml-1 fas"
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'name' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'name' && filters.orderBy.direction == 'desc'}"></i>
                         </th>
-                        <th>
+                        <th class="d-none d-sm-table-cell">
                             <a href="#" class="text-dark" @click.prevent="sort('desc')">Description</a>
                             <i class="ml-1 fas"
                                :class="{'fa-long-arrow-alt-down': filters.orderBy.column == 'desc' && filters.orderBy.direction == 'asc', 'fa-long-arrow-alt-up': filters.orderBy.column == 'desc' && filters.orderBy.direction == 'desc'}"></i>

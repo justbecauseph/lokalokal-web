@@ -8,7 +8,8 @@
                 <div class="text-center d-lg-none">
                     <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
                 </div>
-                <h1>{{ __('Login') }}</h1>
+                <img src="img/logo.jpg" width="250" alt="Logo">
+                <h2>{{ __('Login') }}</h2>
                 <p class="text-muted">Sign In to your account</p>
 
                 <form method="POST" action="{{ route('login') }}">
@@ -50,7 +51,7 @@
                     </div>
                     <div class="row">
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary px4">
+                            <button type="submit" class="btn btn-primary btn-block px4">
                                 {{ __('Login') }}
                             </button>
                         </div>
@@ -68,13 +69,12 @@
                 </div>
             </div>
         </div>
-        <div class="card text-white bg-primary py-5 d-md-down-none">
-            <div class="card-body text-center">
+        <div class="card bg-primary text-white py-5 d-md-down-none">
+            <div class="card-body text-center d-flex align-items-center justify-content-center">
                 <div>
-                    <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
-                    <h2>{{ __('Sign up') }}</h2>
-                    <p>If you don't have account create one.</p>
-                    <a class="btn btn-primary active mt-2" href="{{ route('register') }}">{{ __('Register Now!') }}</a>
+                    <h1>Register</h1>
+                    <p>Are you new here?</p>
+                    <a class="btn btn-light active mt-2" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
                 </div>
             </div>
         </div>
