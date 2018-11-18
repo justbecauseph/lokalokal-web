@@ -30,8 +30,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #2da1db;
+                color: #ffffff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -67,7 +67,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #ffffff;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -85,7 +85,7 @@
             }
         </style>
     </head>
-    <body>
+    <body  >
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -100,7 +100,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    LokaLocal
+                    LocaLokal
+                </div>
+                <h2>X</h2>
+                <div class="title m-b-md">
+                    Loft
                 </div>
             </div>
         </div>
