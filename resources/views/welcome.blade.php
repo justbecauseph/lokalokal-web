@@ -100,20 +100,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Scaffold
-                </div>
-
-                <div class="links m-b-xl">
-                    <a href="https://laravel-scaffold-docs.modulr.io">Documentation</a>
-                    <a href="https://medium.com/modulr">Tutorials</a>
-                    <a href="https://github.com/modulr/laravel-scaffold">GitHub</a>
-                </div>
-
-                <div>
-                    <p class="lead">Demo Credentials</p>
-
-                    email: <strong>admin@modulr.io</strong><br>
-                    password: <strong>admin</strong>
+                    LokaLocal
                 </div>
             </div>
         </div>
