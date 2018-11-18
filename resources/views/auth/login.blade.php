@@ -9,8 +9,8 @@
                     <img src="svg/modulr.svg" class="mb-5" width="150" alt="Modulr Logo">
                 </div>
                 <img src="img/logo.jpg" width="250" alt="Logo">
-                <h2>{{ __('Login') }}</h2>
-                <p class="text-muted">Sign In to your account</p>
+                <h1 class="text-center">{{ __('Login') }}</h1>
+                <p class="text-muted text-center">Sign In to your account</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
@@ -74,7 +74,7 @@
                 <div>
                     <h1>Register</h1>
                     <p>Are you new here?</p>
-                    <a class="btn btn-light active mt-2" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+                    <a class="btn btn-outline-light mt-3" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
                 </div>
             </div>
         </div>

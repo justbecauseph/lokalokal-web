@@ -3,7 +3,7 @@
 @section('auth')
 <div class="col-md-6">
     <div class="card mx-4">
-        <div class="card-body p-4">
+        <div class="card-body p-5">
             <div class="d-flex justify-content-center">
                 <div>
                     <img src="img/logo.jpg" width="250" alt="Logo">
