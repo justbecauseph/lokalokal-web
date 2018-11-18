@@ -5,7 +5,7 @@ Route::middleware('auth')->group(function () {
         Route::group(['prefix' => 'skus'], function() {
             Route::view('/', 'skus.index')->middleware('permission:read-skus');
 //            Route::view('/create', 'skus.create')->middleware('permission:create-skus');
-//            Route::view('/{sku}/edit', 'skus.edit')->middleware('permission:update-skus');
+            Route::view('/{sku}/edit', 'skus.edit')->middleware('permission:read-skus');
         });
 
         // api
@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
 //            Route::get('/count', 'UserController@count');
             Route::post('/filter', 'SkuController@filter')->middleware('permission:read-skus');
 
-//            Route::get('/{sku}', 'UserController@show')->middleware('permission:read-skus');
+            Route::get('/{sku}/show', 'SkuController@show')->middleware('permission:read-skus');
 //            Route::post('/store', 'UserController@store')->middleware('permission:create-skus');
 //            Route::put('/update/{sku}', 'UserController@update')->middleware('permission:update-skus');
 //            Route::delete('/{sku}', 'UserController@destroy')->middleware('permission:delete-skus');

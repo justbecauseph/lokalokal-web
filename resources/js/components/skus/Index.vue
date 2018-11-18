@@ -63,7 +63,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="sku in skus">
+                    <tr v-for="sku in skus" @click="editSku(sku.id)">
                         <td class="d-none d-sm-table-cell">{{sku.id}}</td>
                         <td>{{sku.name}}</td>
                         <td class="d-none d-sm-table-cell">{{sku.desc}}</td>
@@ -161,6 +161,9 @@
             filter() {
                 this.filters.pagination.current_page = 1
                 this.getSkus()
+            },
+            editSku(skuId) {
+                location.href = `/skus/${skuId}/edit`
             },
             changeSize(perPage) {
                 this.filters.pagination.current_page = 1

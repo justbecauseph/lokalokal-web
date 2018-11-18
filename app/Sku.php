@@ -3,6 +3,7 @@
 namespace LokaLocal;
 
 use Illuminate\Database\Eloquent\Model;
+use QrCode;
 
 /**
  * LokaLocal\Sku
@@ -37,8 +38,17 @@ class Sku extends Model
         'amount' => 'double'
     ];
 
+    protected $appends = [
+        'qr_code'
+    ];
+
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    public function getQrCodeAttribute()
+    {
+        return base64_encode(QrCode::size(500)->format('svg')->generate($this->code));
     }
 }

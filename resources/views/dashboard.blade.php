@@ -32,6 +32,13 @@
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-6 col-xl-4">
+                        <sku-breakdown-chart></sku-breakdown-chart>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
