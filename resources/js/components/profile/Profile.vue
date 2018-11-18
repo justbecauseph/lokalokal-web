@@ -7,33 +7,33 @@
         <a class="btn btn-primary" href="#" :disabled="submiting" @click.prevent="updateAuthUser">
           <i class="fas fa-spinner fa-spin" v-if="submiting"></i>
           <i class="far fa-save" v-else></i>
-          <span class="d-md-down-none ml-1">Save profile</span>
+          <span class="d-md-down-none ml-1">Save</span>
         </a>
       </li>
     </ol>
     <div class="container">
       <div class="card-body px-0">
         <form class="form-horizontal" v-if="!loading">
-          <div class="form-group row justify-content-md-center">
-            <div class="col-md-3 col-xl-2">Avatar</div>
+          <div class="form-group row justify-content-md-center mb-5">
+            <div class="col-md-3 col-xl-2 font-weight-bold">Avatar</div>
             <div class="col-md-9 col-xl-5">
               <small class="form-text text-muted mb-3">You can change your avatar here or remove the current avatar</small>
               <avatar :user="user"></avatar>
             </div>
           </div>
-          <hr class="my-3">
-          <div class="form-group row justify-content-md-center">
-            <label class="col-md-3 col-xl-2">Full Name</label>
+          <hr>
+          <div class="form-group row justify-content-md-center mt-5">
+            <label class="col-md-3 col-xl-2 font-weight-bold">Full Name</label>
             <div class="col-md-9 col-xl-5">
-              <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="user.name">
+              <input class="form-control" :class="{'is-invalid': errors.name}" type="text" v-model="user.name"/>
               <small class="form-text text-muted">Enter your name, so people you know can recognize you.</small>
               <div class="invalid-feedback" v-if="errors.name">{{errors.name[0]}}</div>
             </div>
           </div>
           <div class="form-group row justify-content-md-center">
-            <label class="col-md-3 col-xl-2">Email</label>
+            <label class="col-md-3 col-xl-2 font-weight-bold">Email</label>
             <div class="col-md-9 col-xl-5">
-              <input class="form-control" :class="{'is-invalid': errors.email}" type="email" v-model="user.email">
+              <input class="form-control" :class="{'is-invalid': errors.email}" type="email" v-model="user.email"/>
               <small class="form-text text-muted">This email will be displayed on your public profile.</small>
               <div class="invalid-feedback" v-if="errors.email">{{errors.email[0]}}</div>
             </div>

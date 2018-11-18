@@ -4,7 +4,7 @@
             <li class="breadcrumb-item">
                 <a href="/skus">
                     <i class="fa fa-chevron-left mr-1"></i>
-                    Skus
+                    SKU
                 </a>
             </li>
             <li class="breadcrumb-item active">Edit</li>

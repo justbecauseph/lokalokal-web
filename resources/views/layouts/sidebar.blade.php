@@ -9,7 +9,7 @@
             @can('read-skus')
                 <li class="nav-item">
                     <a class="nav-link" href="/skus">
-                        <i class="nav-icon icon-layers"></i> Skus
+                        <i class="nav-icon icon-layers"></i> SKU
                     </a>
                 </li>
             @endcan

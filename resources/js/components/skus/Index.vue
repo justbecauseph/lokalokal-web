@@ -3,7 +3,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">Skus</li>
             <li class="breadcrumb-menu">
-                <a class="btn btn-outline-success text-success" href="/skus/create">New sku</a>
+                <a class="btn btn-outline-success text-success" href="/skus/create"><i class="fas fa-plus"></i>New</a>
             </li>
         </ol>
         <div class="container">
